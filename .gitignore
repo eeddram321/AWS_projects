@@ -1,0 +1,160 @@
+# ===========================================
+# AWS ElastiCache & RDS MySQL Project
+# .gitignore - Protect Sensitive Data
+# ===========================================
+
+# -----------------------------------------
+# AWS Credentials & Keys
+# -----------------------------------------
+*.pem
+*.key
+*.ppk
+*.pub
+credentials
+credentials.csv
+accessKeys.csv
+*_accessKeys.csv
+.aws/
+aws-credentials*
+*credentials*.json
+*credentials*.csv
+
+# -----------------------------------------
+# Environment Variables & Config Files
+# -----------------------------------------
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+*.env
+config.ini
+config.yaml
+config.yml
+secrets.yaml
+secrets.yml
+secrets.json
+
+# -----------------------------------------
+# AWS CLI & SDK Config
+# -----------------------------------------
+.aws/
+aws-config
+.boto
+.s3cfg
+
+# -----------------------------------------
+# SSH Keys & Security
+# -----------------------------------------
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+id_ecdsa
+id_ecdsa.pub
+id_ed25519
+id_ed25519.pub
+*.pem
+*.key
+known_hosts
+
+# -----------------------------------------
+# Database Credentials & Dumps
+# -----------------------------------------
+*.sql
+*.dump
+*.db
+db_password*
+mysql_password*
+redis_password*
+
+# -----------------------------------------
+# Terraform & Infrastructure as Code
+# -----------------------------------------
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+terraform.tfstate.backup
+
+# -----------------------------------------
+# Log Files
+# -----------------------------------------
+*.log
+logs/
+*.out
+nohup.out
+
+# -----------------------------------------
+# IDE & Editor Files
+# -----------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------
+# Python
+# -----------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -----------------------------------------
+# Node.js (if applicable)
+# -----------------------------------------
+node_modules/
+npm-debug.log
+
+# -----------------------------------------
+# Temporary Files
+# -----------------------------------------
+*.tmp
+*.temp
+*.bak
+*.backup
+temp/
+tmp/
+
+# -----------------------------------------
+# OS Generated Files
+# -----------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -----------------------------------------
+# Archives
+# -----------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# -----------------------------------------
+# OPTIONAL: Uncomment if you want to
+# exclude screenshots (they may contain
+# sensitive AWS info like Account IDs,
+# endpoints, IPs, etc.)
+# -----------------------------------------
+# pictures/
+# *.png
+# *.jpg
+# *.jpeg
+# screenshots/
