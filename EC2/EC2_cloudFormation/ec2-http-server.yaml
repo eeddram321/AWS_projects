@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 HTTP Server with Apache
+
+Parameters:
+  KeyName:
+    Type: String
+    Default: http-ssh-key
+
+Resources:
+  HttpSshSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTP
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  HttpServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0fa3fe0fa7920f68e
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - !Ref HttpSshSecurityGroup
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+          PUBLIC_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
+          echo "<h1>CloudFormation instance with IP: $PUBLIC_IP</h1>" > /var/www/html/index.html
+          echo "ok" > /var/www/html/health.html
+      Tags:
+        - Key: Name
+          Value: http-server-cfn
+
+Outputs:
+  InstanceId:
+    Value: !Ref HttpServer
+  PublicIP:
+    Value: !GetAtt HttpServer.PublicIp
+  WebsiteURL:
+    Value: !Sub 'http://${HttpServer.PublicIp}'
